@@ -1,0 +1,27 @@
+{
+  "name": "parcelwp",
+  "version": "1.0.0",
+  "description": "Custom Parcel.js setup for WordPress Themes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "parcelwp": "src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lxbdr/parcelwp.git"
+  },
+  "author": "Alexander Bader",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lxbdr/parcelwp/issues"
+  },
+  "homepage": "https://github.com/lxbdr/parcelwp#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.5.0",
+    "browser-sync": "^2.27.9",
+    "parcel": "^2.5.0"
+  }
+}
