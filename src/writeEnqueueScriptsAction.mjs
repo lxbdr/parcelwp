@@ -1,5 +1,4 @@
 import path from "path";
-import fs from "fs";
 
 export default function writeEnqueueScriptsAction(rootDir, bundles, hashes = {}, mode = 'production', config) {
 

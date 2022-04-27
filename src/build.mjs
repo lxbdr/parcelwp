@@ -43,7 +43,7 @@ const getParcel = (mode, rootDir, entries, distDir, publicUrl) => {
                 distDir: path.join(distDir, '/legacy')
             }
         },
-        // shouldContentHash: mode === 'production',
+        shouldContentHash: mode === 'production',
         shouldAutoInstall: true,
         // serveOptions: {
         //   publicUrl: publicUrl
@@ -56,10 +56,15 @@ const getParcel = (mode, rootDir, entries, distDir, publicUrl) => {
 }
 
 
-export const build = async (rootDir, entries, distDir, publicUrl, config = {
-    wpNamespace: "theme"
-}) => {
+export const build = async (rootDir, entries, distDir, publicUrl, config = {}) => {
+
+    config = {
+        wpNamespace: "theme",
+        ...config
+    }
+
     const mode = 'production';
+    const wpNamespace = config.wpNamespace;
 
     const bundler = getParcel(mode, rootDir, entries, distDir, publicUrl);
 
@@ -95,10 +100,15 @@ export const build = async (rootDir, entries, distDir, publicUrl, config = {
     }
 };
 
-export const watch = async (rootDir, entries, distDir, publicUrl, proxy, config = {
-    wpNamespace: "theme"
-}) => {
+export const watch = async (rootDir, entries, distDir, publicUrl, proxy, config = {}) => {
+    config = {
+        wpNamespace: "theme",
+        ...config
+    }
+
     const mode = 'development';
+    const wpNamespace = config.wpNamespace;
+
 
     const bundler = getParcel(mode, rootDir, entries, distDir, publicUrl);
 
@@ -125,7 +135,7 @@ export const watch = async (rootDir, entries, distDir, publicUrl, proxy, config 
     return bundler.watch((err, event) => {
         if (event.type === 'buildSuccess') {
             let bundles = event.bundleGraph.getBundles();
-            const code = writeEnqueueScriptsAction(rootDir, bundles, getHashes(bundles), mode, {
+            const code = writeEnqueueScriptsAction(rootDir, bundles, getHashes(rootDir, bundles), mode, {
                 wpNamespace
             });
 
